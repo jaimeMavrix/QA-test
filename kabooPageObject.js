@@ -6,10 +6,9 @@ var KabooPageObject = function () {
     var username = element(by.css('[name="username"]'));
     var password = element(by.css('[name="password"]'));
     var loginButton = element(by.id('submitLogin'));
-    var errorMessage = element(by.xpath(".//div[@class='m-site-notification__item is-current']"));
+    var messageLoginSuccess = element(by.xpath(".//*[contains(text(),'hi')]"));
+    var messageLoginFailed = element(by.xpath(".//*[contains(text(),'failed')]"));
 
-    // muuda see lehekülg (klass) KabooPageObject KabooLoginPageObject.
-    //  navigate to login url ja
 
     this.openLoginUrl = function () {
         browser.driver.get(loginUrl);
@@ -26,11 +25,15 @@ var KabooPageObject = function () {
     this.login = function () {
         loginButton.click();
     };
-    this.errorMessageDisplayed = function () {
+    this.successMessage = function () {
         browser.wait(function() {
-            return errorMessage.isPresent();
+            return messageLoginSuccess.isPresent();
         }, 5000);
-        //errorMessage.isDisplayed();
+    };
+    this.failedMessage = function () {
+        browser.wait(function() {
+            return messageLoginFailed.isPresent();
+        }, 5000);
     };
 
 };
