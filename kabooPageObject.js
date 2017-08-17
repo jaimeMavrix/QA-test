@@ -3,9 +3,9 @@
 var KabooPageObject = function () {
 
     //elements to access
-    var username = element(by.css('[name="email"]'));
-    var password = element(by.css('[name="pwd"]'));
-    var loginButton = element(by.css('.e-btn'));
+    var username = element(by.css('[name="username"]'));
+    var password = element(by.css('[name="password"]'));
+    var loginButton = element(by.id('submitLogin'));
 
 
     this.navigateToURL = function (url) {
@@ -13,7 +13,7 @@ var KabooPageObject = function () {
     };
 
     this.setUsername = function (user) {
-        username.sendKeys('kaboo');
+        username.sendKeys(user);
     };
 
     this.setPassword = function (pass) {
