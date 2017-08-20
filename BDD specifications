@@ -1,0 +1,98 @@
+
+Story: When user claims a reward (token) the "Your history" section will be displayed
+
+As a user
+I want to see my token history after claiming a reward
+So that I could see an overview about my winnings
+
+Scenario 1: Reward is claimed
+Given that a user has won
+And he has an option to claim the reward 
+When he claims the reward
+Then he is redirected  to "Your history" section
+
+Scenario 2: "Your history" section displayed
+Given that a user claims the reward 
+When user is redirected  to "Your history" section
+Then he sees previously obtained and claimed tokens
+
+Scenario 3: listing tokens in "Your history" section
+Given the user is redirected  to "Your history" section
+And he has winning tokens
+When he sees previously obtained and claimed tokens
+Then they are chronologically ordered
+
+Scenario 4: last 8 tokens are displayed
+Given that user has winning tokens
+When he has won previously more than 8 tokens
+Then only the last 8 of them will be displayed
+
+Scenario 5: displaying  tokens in "Your history" section
+Given that user sees previously obtained and claimed tokens
+When he has different kind of tokens
+Then each winning token is displayed as 1 characteristic thumbnail 
+
+Scenario 6: displaying  same kind of tokens
+Given that user has winning tokens
+When he has same kind of tokens
+Then they have the same characteristic thumbnail
+And are displayed as different winnings 
+
+was not in business requirement but it is in the design:
+
+Scenario 6: action in "Your history" section
+Given that a user is "Your history" section
+When he is pointing a mouse to one of his token
+Then he sees a tokens name displayed
+
+Scenario 7. Freespin is displayed
+Given that user has winning tokens
+When he has a freespin opportunity with the token
+Then he has a freespin icon displayed on the token
+
+
+back-end scenarios
+
+As a system
+I want to receive token history in a JSON format
+So that I could see an overview about user winnings
+
+Scenario 1: possible to request
+Given that system has a path for method "/igc/betspin/rewards/history" 
+When the system has possibility to request from method
+Then the response is gettable with only 1 param "userName"
+
+Scenario 2: request is filled with param 
+Given that system will requests from method /igc/betspin/rewards/history
+And the requests is filled with param "userName"
+When the request is made
+Then the response is in JSON format
+
+Scenario 3: listing in array and sub-array
+Given that the requests is filled with param "userName"
+When the response is in JSON format
+Then winning tokens are listed in array  
+When claiming unique token more than once 
+Then the unique tokens are listed as sub-array objects
+
+Scenario 4: information in JSON 
+Given that the tokens are won more than once
+And they are in sub array
+When information is listed in JSON
+Then it contain following information: game-slug,date claimed, info, reason, expiry date
+
+Scenario 5: response order in JSON
+Given the response is in JSON format
+And there are more than one unique token
+When the tokens list is received
+Then its in chronological order by information "date claimed"
+
+
+Extra discussion ideas:
+
+1) would he be able to see token history, so user would know when they are expired?
+2) if the expired date is passed, should we still show them if they are included at the last 8?
+3) looking at the design, will the section fit 8 tokens (scrollbar needed or etc.) ? 
+
+
+
